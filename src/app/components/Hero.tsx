@@ -42,7 +42,7 @@ export const Hero = () => {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FFEB3B]/25 text-[#008080] font-['Inter'] font-semibold text-sm"
             >
               <Star className="w-4 h-4 text-[#FFEB3B] fill-current shrink-0" />
-              La opción #1 en Aguascalientes
+              La opción #1 en brincolines de Aguascalientes
             </motion.div>
 
             {/* Headline */}
