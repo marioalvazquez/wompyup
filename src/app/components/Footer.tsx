@@ -12,7 +12,7 @@ export const Footer = () => {
           <div className="space-y-6">
             <img src="/logo.png" alt="Wompy Up" className="h-20 w-auto object-contain" />
             <p className="text-white/80 leading-relaxed max-w-sm">
-              Brincolines limpios, seguros y puntuales en Aguascalientes para que tu evento sea inolvidable.
+              Renta de brincolines limpios, seguros y puntuales en Aguascalientes para que tu evento sea inolvidable.
             </p>
             <div className="flex gap-4">
               <a href="https://www.facebook.com/WOMPYUP/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#E91E63] transition-colors">
@@ -55,23 +55,11 @@ export const Footer = () => {
           </div>
 
           <div className="space-y-6">
-            <h4 className="font-['Varela_Round'] text-xl font-bold text-white mb-6">Horarios de Atención</h4>
+            <h4 className="font-['Varela_Round'] text-xl font-bold text-white mb-6">Horario de Atención via WhatsApp</h4>
             <ul className="space-y-4 text-white/80">
-              <li className="flex justify-between border-b border-white/10 pb-2">
-                <span className="flex items-center gap-2"><Clock className="w-4 h-4 text-[#FFEB3B]" /> Lunes</span>
-                <span className="font-medium">8:00 AM – 5:00 PM</span>
-              </li>
-              <li className="flex justify-between border-b border-white/10 pb-2">
-                <span className="flex items-center gap-2"><Clock className="w-4 h-4 text-[#FFEB3B]" /> Mar - Vie</span>
-                <span className="font-medium">10:30 AM – 6:00 PM</span>
-              </li>
-              <li className="flex justify-between border-b border-white/10 pb-2">
-                <span className="flex items-center gap-2"><Clock className="w-4 h-4 text-[#FFEB3B]" /> Sábado</span>
-                <span className="font-medium">8:00 AM – 2:00 PM</span>
-              </li>
-              <li className="flex justify-between pb-2 text-white/50">
-                <span className="flex items-center gap-2"><Clock className="w-4 h-4 opacity-50" /> Domingo</span>
-                <span>Cerrado</span>
+              <li className="flex justify-between pb-2">
+                <span className="flex items-center gap-2"><Clock className="w-4 h-4 text-[#FFEB3B]" /> Lunes a Domingo</span>
+                <span className="font-medium">8:00 AM – 11:00 PM</span>
               </li>
             </ul>
           </div>

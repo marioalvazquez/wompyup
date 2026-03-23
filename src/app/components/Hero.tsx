@@ -42,7 +42,7 @@ export const Hero = () => {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FFEB3B]/25 text-[#008080] font-['Inter'] font-semibold text-sm"
             >
               <Star className="w-4 h-4 text-[#FFEB3B] fill-current shrink-0" />
-              La opción #1 en brincolines de Aguascalientes
+              La opción #1 en renta de brincolines en Aguascalientes
             </motion.div>
 
             {/* Headline */}
@@ -68,7 +68,7 @@ export const Hero = () => {
               animate="visible"
               className="text-lg lg:text-xl text-[#546E7A] max-w-lg mx-auto lg:mx-0 font-['Inter'] leading-relaxed"
             >
-              Brincolines limpios, seguros y puntuales para fiestas increíbles.{' '}
+              Renta de brincolines limpios, seguros y puntuales para fiestas increíbles.{' '}
               <span className="font-semibold text-[#008080]">Reservación rápida y fácil.</span>
             </motion.p>
 

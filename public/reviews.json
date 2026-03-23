@@ -1,0 +1,49 @@
+{
+  "reviews": [
+    {
+      "author_name": "Veronica Reynoso",
+      "author_url": "https://www.google.com/maps/contrib/103153729649421146246/reviews",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocL7aVjre_k7wOrIyyZboed35ad_KZAt2M6WPzXZ2H6d8ow7nQSv=s128-c0x00000000-cc-rp-mo-ba2",
+      "rating": 5,
+      "relative_time_description": "un mes atrás",
+      "time": 1770666646,
+      "text": "Excelente servicio, el personal muy amable y puntual en sus entregas!! Definitivamente los consideraré para el futuro!"
+    },
+    {
+      "author_name": "Janella Morales",
+      "author_url": "https://www.google.com/maps/contrib/108733599159536088565/reviews",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIUF2V1s7iG4__Cjhn7ZihWBuIYG6hRke7bQU2p5u42cVaZcA=s128-c0x00000000-cc-rp-mo",
+      "rating": 5,
+      "relative_time_description": "2 meses atrás",
+      "time": 1767904272,
+      "text": "La atención al cliente es muy buena, su catálogo está muy padre porque tiene videos y fotos de los inflables eso ayuda un montón. También. Tienen mucha variedad. Los recomiendo ampliamente 🙂"
+    },
+    {
+      "author_name": "Marco Ibarra",
+      "author_url": "https://www.google.com/maps/contrib/103071135274926103233/reviews",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUlvBXWeeeUEjn0qxM0FjD0kYO9l5wQZUy4nHJkuaSlojyAs6a7gQ=s128-c0x00000000-cc-rp-mo",
+      "rating": 5,
+      "relative_time_description": "4 meses atrás",
+      "time": 1761841416,
+      "text": "Exelente servicio y calidad en los inflables con mucha variedad para escoger el idóneo al evento.\n\nRecomendadisisisimoo!!"
+    },
+    {
+      "author_name": "Picasso Resin",
+      "author_url": "https://www.google.com/maps/contrib/100257306619825113196/reviews",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXId_jBIomYB8f5Omh059jJVZIbG1ts4g5ARwCjtWU-76A9p5M=s128-c0x00000000-cc-rp-mo",
+      "rating": 5,
+      "relative_time_description": "8 meses atrás",
+      "time": 1752562099,
+      "text": "Recomiendo a wompy up , vi la publicidad en Instagram y me ayudaron mucho desde el comienzo, tienen mucha variedad , nosotros escogimos el más grande, con alberca de pelotas, todos los niños cabían perfectamente , saludos !"
+    },
+    {
+      "author_name": "Herson Antonio González Ponce",
+      "author_url": "https://www.google.com/maps/contrib/107995450884064974604/reviews",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKHJX0hAFzcgCaRqxkpyk49P6d941XkUBs5FpyIGPeyFAa65g=s128-c0x00000000-cc-rp-mo",
+      "rating": 5,
+      "relative_time_description": "8 meses atrás",
+      "time": 1752167495,
+      "text": "Excelente servicio y comunicación. La instalación del inflable se dio en tiempo y forma, sin contratiempos. El inflable estaba limpio y en muy buen estado. Recomendado!"
+    }
+  ]
+}
