@@ -1,11 +1,38 @@
 import { ArrowRight, Star, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { useEffect, useState } from 'react';
 
 const fadeUp = (delay = 0) => ({
   hidden: { opacity: 0, y: 32 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' as const, delay } },
 });
+
+const accents = [
+  'Renta de brincolines',
+  'Diversión garantizada',
+  'Seguridad y precio',
+];
+
+const TYPEWRITER_SPEED = 55; // ms per char
+const HOLD_DURATION = 3200;  // ms to hold before cycling
+
+function useTypewriter(text: string) {
+  const [displayed, setDisplayed] = useState('');
+
+  useEffect(() => {
+    setDisplayed('');
+    let i = 0;
+    const id = setInterval(() => {
+      i++;
+      setDisplayed(text.slice(0, i));
+      if (i >= text.length) clearInterval(id);
+    }, TYPEWRITER_SPEED);
+    return () => clearInterval(id);
+  }, [text]);
+
+  return displayed;
+}
 
 const checklistItems = [
   'Desinfectados antes de cada evento',
@@ -15,6 +42,18 @@ const checklistItems = [
 ];
 
 export const Hero = () => {
+  const [accentIndex, setAccentIndex] = useState(0);
+  const accent = accents[accentIndex];
+  const typedAccent = useTypewriter(accent);
+
+  useEffect(() => {
+    const duration = accent.length * TYPEWRITER_SPEED + HOLD_DURATION;
+    const id = setTimeout(() => {
+      setAccentIndex((i) => (i + 1) % accents.length);
+    }, duration);
+    return () => clearTimeout(id);
+  }, [accentIndex, accent.length]);
+
   return (
     <section className="relative overflow-hidden bg-[#F8F9FA] min-h-[92vh] flex items-center">
 
@@ -46,20 +85,17 @@ export const Hero = () => {
             </motion.div>
 
             {/* Headline */}
-            <motion.h1
-              variants={fadeUp(0.1)}
-              initial="hidden"
-              animate="visible"
-              className="text-5xl lg:text-6xl xl:text-7xl font-['Varela_Round'] font-extrabold text-[#008080] tracking-tight leading-[1.1]"
-            >
-              Hacemos de tu día especial{' '}
+            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-['Varela_Round'] font-extrabold text-[#008080] tracking-tight leading-[1.1]">
+              Somos tu mejor opción en
+              <br />
               <span className="relative inline-block text-[#E91E63]">
-                inolvidable
+                {typedAccent}
+                <span className="animate-pulse opacity-60">|</span>
                 <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                   <path d="M2 8 Q75 2 150 8 Q225 14 298 8" stroke="#FFEB3B" strokeWidth="3.5" strokeLinecap="round"/>
                 </svg>
               </span>
-            </motion.h1>
+            </h1>
 
             {/* Sub */}
             <motion.p
@@ -69,7 +105,7 @@ export const Hero = () => {
               className="text-lg lg:text-xl text-[#546E7A] max-w-lg mx-auto lg:mx-0 font-['Inter'] leading-relaxed"
             >
               Renta de brincolines limpios, seguros y puntuales para fiestas increíbles.{' '}
-              <span className="font-semibold text-[#008080]">Reservación rápida y fácil.</span>
+              <span className="font-semibold text-[#008080]">Renta rápida y fácil.</span>
             </motion.p>
 
             {/* Checklist */}
