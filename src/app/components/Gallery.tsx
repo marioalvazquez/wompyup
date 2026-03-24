@@ -1,26 +1,82 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Hls from 'hls.js';
 
 const videos = [
-  { src: 'https://cdn.hoyadonde.com/bn1/6f6f7be8-630d-4bdb-9665-3bffc0c6fea3.mp4', thumb: '/thumbnails/thumb-0.jpg' },
-  { src: 'https://cdn.hoyadonde.com/bn1/copy_306EBEC0-61DA-470A-A61A-F3E7F53EC76A.mp4', thumb: '/thumbnails/thumb-1.jpg' },
-  { src: 'https://cdn.hoyadonde.com/bn1/IMG_4574.mp4', thumb: '/thumbnails/thumb-2.jpg' },
-  { src: 'https://cdn.hoyadonde.com/bn1/IMG_3472.mp4', thumb: '/thumbnails/thumb-3.jpg' },
-  { src: 'https://cdn.hoyadonde.com/bn1/IMG_3132.mp4', thumb: '/thumbnails/thumb-4.jpg' },
-  { src: 'https://cdn.hoyadonde.com/bn1/a7ccd044-1e5c-46b4-bb09-b608f3d3e69f.mp4', thumb: '/thumbnails/thumb-5.jpg' },
+  {
+    hls: 'https://cdn.hoyadonde.com/bn1/hls/video-0/playlist.m3u8',
+    src: 'https://cdn.hoyadonde.com/bn1/6f6f7be8-630d-4bdb-9665-3bffc0c6fea3.mp4',
+    thumb: '/thumbnails/thumb-0.jpg',
+  },
+  {
+    hls: 'https://cdn.hoyadonde.com/bn1/hls/video-1/playlist.m3u8',
+    src: 'https://cdn.hoyadonde.com/bn1/copy_306EBEC0-61DA-470A-A61A-F3E7F53EC76A.mp4',
+    thumb: '/thumbnails/thumb-1.jpg',
+  },
+  {
+    hls: 'https://cdn.hoyadonde.com/bn1/hls/video-2/playlist.m3u8',
+    src: 'https://cdn.hoyadonde.com/bn1/IMG_4574.mp4',
+    thumb: '/thumbnails/thumb-2.jpg',
+  },
+  {
+    hls: 'https://cdn.hoyadonde.com/bn1/hls/video-3/playlist.m3u8',
+    src: 'https://cdn.hoyadonde.com/bn1/IMG_3472.mp4',
+    thumb: '/thumbnails/thumb-3.jpg',
+  },
+  {
+    hls: 'https://cdn.hoyadonde.com/bn1/hls/video-4/playlist.m3u8',
+    src: 'https://cdn.hoyadonde.com/bn1/IMG_3132.mp4',
+    thumb: '/thumbnails/thumb-4.jpg',
+  },
+  {
+    hls: 'https://cdn.hoyadonde.com/bn1/hls/video-5/playlist.m3u8',
+    src: 'https://cdn.hoyadonde.com/bn1/a7ccd044-1e5c-46b4-bb09-b608f3d3e69f.mp4',
+    thumb: '/thumbnails/thumb-5.jpg',
+  },
 ];
 
 export const Gallery = () => {
   const [active, setActive] = useState(0);
-  const mainRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const hlsRef = useRef<Hls | null>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Destroy previous HLS instance
+    if (hlsRef.current) {
+      hlsRef.current.destroy();
+      hlsRef.current = null;
+    }
+
+    const { hls, src } = videos[active];
+
+    if (Hls.isSupported()) {
+      const hlsInstance = new Hls({ startLevel: -1 }); // auto quality
+      hlsInstance.loadSource(hls);
+      hlsInstance.attachMedia(video);
+      hlsRef.current = hlsInstance;
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      // Safari has native HLS support
+      video.src = hls;
+    } else {
+      // Fallback to original mp4
+      video.src = src;
+    }
+
+    return () => {
+      hlsRef.current?.destroy();
+      hlsRef.current = null;
+    };
+  }, [active]);
 
   const goTo = (idx: number) => {
-    if (mainRef.current) {
-      mainRef.current.pause();
-      mainRef.current.currentTime = 0;
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
     }
     setActive(idx);
-    mainRef.current?.load();
   };
 
   return (
@@ -52,9 +108,7 @@ export const Gallery = () => {
           {/* Main video */}
           <div className="relative aspect-[9/16] md:aspect-video bg-black rounded-[24px] overflow-hidden">
             <video
-              key={active}
-              ref={mainRef}
-              src={videos[active].src}
+              ref={videoRef}
               poster={videos[active].thumb}
               className="w-full h-full object-cover"
               controls
