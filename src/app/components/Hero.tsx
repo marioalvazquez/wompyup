@@ -55,7 +55,7 @@ export const Hero = () => {
   }, [accentIndex, accent.length]);
 
   return (
-    <section className="relative overflow-hidden bg-[#F8F9FA] min-h-[92vh] flex items-center">
+    <section className="relative overflow-hidden bg-[#F8F9FA] min-h-[92vh] md:h-[calc(100vh-5rem)] flex items-center">
 
       {/* Background decorative shapes */}
       <div className="absolute inset-0 pointer-events-none">
@@ -67,11 +67,12 @@ export const Hero = () => {
         />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full pt-16 pb-0 lg:pt-0">
-        <div className="flex flex-col lg:flex-row items-center lg:items-end justify-between gap-8 lg:gap-0">
+      {/* Container — NOT relative so the image can anchor to the section */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full pt-16 pb-8 lg:pt-0 lg:pb-0">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-0 w-full">
 
           {/* ── Left: text content ── */}
-          <div className="lg:w-[52%] text-center lg:text-left z-10 space-y-7 pb-16 lg:pb-24">
+          <div className="lg:w-[50%] text-center lg:text-left z-10 space-y-7">
 
             {/* Badge */}
             <motion.div
@@ -166,7 +167,7 @@ export const Hero = () => {
             initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
-            className="lg:w-[52%] relative flex justify-end items-end self-end z-10"
+            className="w-full lg:w-[52%] relative flex justify-end items-end z-10 md:absolute md:right-0 md:bottom-0 md:w-[52%] md:h-[70%]"
           >
             {/* Floating 5-star badge */}
             <motion.div
@@ -193,13 +194,13 @@ export const Hero = () => {
             </motion.div>
 
             {/* Teal arc */}
-            <div className="absolute bottom-0 right-0 w-[95%] h-[85%] bg-gradient-to-tl from-[#00CED1]/15 to-transparent rounded-tl-[80px]" />
+            <div className="absolute bottom-0 right-0 w-full h-full bg-gradient-to-tl from-[#00CED1]/15 to-transparent rounded-tl-[80px]" />
 
             {/* Bounce house with subtle float */}
             <motion.img
               src="/wompy.png"
               alt="Brincolin Wompy Up"
-              className="relative w-full max-w-[640px] lg:max-w-none object-contain object-right-bottom drop-shadow-2xl select-none"
+              className="relative w-full md:w-auto md:h-full md:max-w-none max-w-[640px] object-contain object-right-bottom drop-shadow-2xl select-none"
               draggable={false}
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
