@@ -88,12 +88,14 @@ export const Hero = () => {
             <h1 className="text-5xl lg:text-6xl xl:text-7xl font-['Varela_Round'] font-extrabold text-[#008080] tracking-tight leading-[1.1]">
               Somos tu mejor opción en
               <br />
-              <span className="relative inline-block text-[#E91E63]">
-                {typedAccent}
-                <span className="animate-pulse opacity-60">|</span>
-                <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                  <path d="M2 8 Q75 2 150 8 Q225 14 298 8" stroke="#FFEB3B" strokeWidth="3.5" strokeLinecap="round"/>
-                </svg>
+              <span className="block min-h-[106px] lg:min-h-[132px] xl:min-h-[160px]">
+                <span className="relative inline-block text-[#E91E63]">
+                  {typedAccent}
+                  <span className="animate-pulse opacity-60">|</span>
+                  <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                    <path d="M2 8 Q75 2 150 8 Q225 14 298 8" stroke="#FFEB3B" strokeWidth="3.5" strokeLinecap="round"/>
+                  </svg>
+                </span>
               </span>
             </h1>
 
@@ -136,7 +138,7 @@ export const Hero = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-[#E91E63] hover:bg-[#D81B60] text-white px-8 py-4 rounded-[32px] font-['Varela_Round'] text-lg font-bold shadow-[0_8px_30px_rgb(233,30,99,0.35)] transition-all hover:scale-105 hover:shadow-[0_12px_40px_rgb(233,30,99,0.45)]"
               >
-                ¡Quiero apartar mi fecha!
+                ¡Quiero apartar mi brincolín!
                 <ArrowRight className="w-5 h-5" />
               </a>
             </motion.div>
