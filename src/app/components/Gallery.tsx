@@ -1,33 +1,25 @@
-import React from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+
+const videos = [
+  'https://cdn.hoyadonde.com/bn1/6f6f7be8-630d-4bdb-9665-3bffc0c6fea3.mp4',
+  'https://cdn.hoyadonde.com/bn1/copy_306EBEC0-61DA-470A-A61A-F3E7F53EC76A.mp4',
+  'https://cdn.hoyadonde.com/bn1/IMG_4574.mp4',
+  'https://cdn.hoyadonde.com/bn1/IMG_3472.mp4',
+  'https://cdn.hoyadonde.com/bn1/IMG_3132.mp4',
+  'https://cdn.hoyadonde.com/bn1/a7ccd044-1e5c-46b4-bb09-b608f3d3e69f.mp4',
+];
 
 export const Gallery = () => {
-  const images = [
-    {
-      src: 'https://images.unsplash.com/photo-1555276831-f5996bfbb1cc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bmljb3JuJTIwcGFydHl8ZW58MXx8fHwxNzc0MjE4MDc5fDA&ixlib=rb-4.1.0&q=80&w=1080',
-      title: 'Mega Isla',
-      desc: 'Para los pequeños guerreros que buscan aventura extrema'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1548323678-0644152a2b88?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxraWRzJTIwcGxheWluZyUyMGJpcnRoZGF5JTIwcGFydHl8ZW58MXx8fHwxNzc0MjE4MDgwfDA&ixlib=rb-4.1.0&q=80&w=1080',
-      title: 'Barco Pirata',
-      desc: '¡Al abordaje! Transforma tu jardín en un océano de aventuras.'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1751235600651-94bbbeb29567?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxraWRzJTIwanVtcGluZyUyMHRyYW1wb2xpbmV8ZW58MXx8fHwxNzc0MjE4MDgwfDA&ixlib=rb-4.1.0&q=80&w=1080',
-      title: 'Casa de Mickey',
-      desc: 'Magia y color en un solo lugar. El clásico con resbaladilla que nunca falla.'
-    }
-  ];
+  const [active, setActive] = useState(0);
+  const mainRef = useRef<HTMLVideoElement>(null);
 
-  const settings = {
-    dots: true, infinite: true, speed: 500,
-    slidesToShow: 1, slidesToScroll: 1,
-    autoplay: true, autoplaySpeed: 4000, arrows: false,
+  const goTo = (idx: number) => {
+    if (mainRef.current) {
+      mainRef.current.pause();
+      mainRef.current.currentTime = 0;
+    }
+    setActive(idx);
   };
 
   return (
@@ -56,18 +48,50 @@ export const Gallery = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: 'easeOut', delay: 0.15 }}
         >
-          <Slider {...settings} className="rounded-[24px] overflow-hidden">
-            {images.map((img, idx) => (
-              <div key={idx} className="relative aspect-[9/16] md:aspect-video outline-none">
-                <ImageWithFallback src={img.src} alt={img.title} className="w-full h-full object-cover rounded-[24px]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#008080]/90 via-[#008080]/20 to-transparent rounded-[24px] flex flex-col justify-end p-8 md:p-12">
-                  <span className="inline-block px-4 py-1.5 bg-[#FFEB3B] text-[#008080] font-bold text-sm rounded-full w-max mb-4 uppercase tracking-wider">Destacado</span>
-                  <h3 className="text-3xl md:text-5xl font-['Varela_Round'] font-bold text-white mb-2">{img.title}</h3>
-                  <p className="text-lg md:text-xl text-white/90 font-medium">{img.desc}</p>
-                </div>
-              </div>
+          {/* Main video */}
+          <div className="relative aspect-[9/16] md:aspect-video bg-black rounded-[24px] overflow-hidden">
+            <video
+              key={active}
+              ref={mainRef}
+              src={videos[active]}
+              className="w-full h-full object-cover"
+              controls
+              playsInline
+              preload="metadata"
+            />
+          </div>
+
+          {/* Thumbnail strip */}
+          <div className="flex gap-2 mt-2 px-1 pb-1 overflow-x-auto scrollbar-hide">
+            {videos.map((src, idx) => (
+              <button
+                key={idx}
+                onClick={() => goTo(idx)}
+                className={`relative flex-shrink-0 w-24 md:w-32 aspect-video rounded-[12px] overflow-hidden border-[3px] transition-all duration-200 ${
+                  idx === active
+                    ? 'border-[#E91E63] scale-[1.04] shadow-md'
+                    : 'border-transparent opacity-60 hover:opacity-100'
+                }`}
+              >
+                <video
+                  src={src}
+                  className="w-full h-full object-cover pointer-events-none"
+                  preload="metadata"
+                  muted
+                  playsInline
+                />
+                {idx !== active && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                    <div className="w-7 h-7 rounded-full bg-white/80 flex items-center justify-center">
+                      <svg className="w-3 h-3 text-[#E91E63] ml-0.5" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M4 2l10 6-10 6V2z" />
+                      </svg>
+                    </div>
+                  </div>
+                )}
+              </button>
             ))}
-          </Slider>
+          </div>
         </motion.div>
 
         <motion.div
