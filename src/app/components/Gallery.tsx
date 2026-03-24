@@ -2,12 +2,12 @@ import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
 const videos = [
-  'https://cdn.hoyadonde.com/bn1/6f6f7be8-630d-4bdb-9665-3bffc0c6fea3.mp4',
-  'https://cdn.hoyadonde.com/bn1/copy_306EBEC0-61DA-470A-A61A-F3E7F53EC76A.mp4',
-  'https://cdn.hoyadonde.com/bn1/IMG_4574.mp4',
-  'https://cdn.hoyadonde.com/bn1/IMG_3472.mp4',
-  'https://cdn.hoyadonde.com/bn1/IMG_3132.mp4',
-  'https://cdn.hoyadonde.com/bn1/a7ccd044-1e5c-46b4-bb09-b608f3d3e69f.mp4',
+  { src: 'https://cdn.hoyadonde.com/bn1/6f6f7be8-630d-4bdb-9665-3bffc0c6fea3.mp4', thumb: '/thumbnails/thumb-0.jpg' },
+  { src: 'https://cdn.hoyadonde.com/bn1/copy_306EBEC0-61DA-470A-A61A-F3E7F53EC76A.mp4', thumb: '/thumbnails/thumb-1.jpg' },
+  { src: 'https://cdn.hoyadonde.com/bn1/IMG_4574.mp4', thumb: '/thumbnails/thumb-2.jpg' },
+  { src: 'https://cdn.hoyadonde.com/bn1/IMG_3472.mp4', thumb: '/thumbnails/thumb-3.jpg' },
+  { src: 'https://cdn.hoyadonde.com/bn1/IMG_3132.mp4', thumb: '/thumbnails/thumb-4.jpg' },
+  { src: 'https://cdn.hoyadonde.com/bn1/a7ccd044-1e5c-46b4-bb09-b608f3d3e69f.mp4', thumb: '/thumbnails/thumb-5.jpg' },
 ];
 
 export const Gallery = () => {
@@ -20,6 +20,7 @@ export const Gallery = () => {
       mainRef.current.currentTime = 0;
     }
     setActive(idx);
+    mainRef.current?.load();
   };
 
   return (
@@ -53,17 +54,18 @@ export const Gallery = () => {
             <video
               key={active}
               ref={mainRef}
-              src={videos[active]}
+              src={videos[active].src}
+              poster={videos[active].thumb}
               className="w-full h-full object-cover"
               controls
               playsInline
-              preload="metadata"
+              preload="none"
             />
           </div>
 
           {/* Thumbnail strip */}
           <div className="flex gap-2 mt-2 px-1 pb-1 overflow-x-auto scrollbar-hide">
-            {videos.map((src, idx) => (
+            {videos.map((video, idx) => (
               <button
                 key={idx}
                 onClick={() => goTo(idx)}
@@ -73,12 +75,11 @@ export const Gallery = () => {
                     : 'border-transparent opacity-60 hover:opacity-100'
                 }`}
               >
-                <video
-                  src={src}
-                  className="w-full h-full object-cover pointer-events-none"
-                  preload="metadata"
-                  muted
-                  playsInline
+                <img
+                  src={video.thumb}
+                  alt={`Brincolin ${idx + 1}`}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
                 />
                 {idx !== active && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/20">

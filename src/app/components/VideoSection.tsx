@@ -1,7 +1,12 @@
 import { Play } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
+
+const VIDEO_ID = 'gef2i6x6dos';
 
 export const VideoSection = () => {
+  const [playing, setPlaying] = useState(false);
+
   return (
     <section id="experiencia" className="py-32 bg-[#008080] text-white relative overflow-hidden">
       <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 2px, transparent 0)', backgroundSize: '40px 40px' }} />
@@ -29,19 +34,39 @@ export const VideoSection = () => {
         </motion.p>
 
         <motion.div
-          className="relative aspect-video rounded-[40px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-4 border-white/20 bg-black group"
+          className="relative aspect-video rounded-[40px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-4 border-white/20 bg-black group cursor-pointer"
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: 'easeOut', delay: 0.25 }}
+          onClick={() => setPlaying(true)}
         >
-          <iframe
-            src="https://www.youtube.com/embed/gef2i6x6dos?autoplay=0&showinfo=0&controls=1"
-            title="La Experiencia Wompy en Acción"
-            className="w-full h-full object-cover opacity-90 transition-opacity group-hover:opacity-100"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
+          {playing ? (
+            <iframe
+              src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&showinfo=0&controls=1`}
+              title="La Experiencia Wompy en Acción"
+              className="w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          ) : (
+            <>
+              <img
+                src={`https://img.youtube.com/vi/${VIDEO_ID}/maxresdefault.jpg`}
+                alt="La Experiencia Wompy en Acción"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+              />
+              {/* Dark overlay */}
+              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300" />
+              {/* Play button */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-20 h-20 bg-white/90 group-hover:bg-white rounded-full flex items-center justify-center shadow-2xl transition-transform duration-200 group-hover:scale-110">
+                  <Play fill="#E91E63" className="w-9 h-9 ml-1 text-[#E91E63]" />
+                </div>
+              </div>
+            </>
+          )}
         </motion.div>
 
         <motion.div
