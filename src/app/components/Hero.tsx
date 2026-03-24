@@ -72,7 +72,7 @@ export const Hero = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-0 w-full">
 
           {/* ── Left: text content ── */}
-          <div className="lg:w-[50%] text-center lg:text-left z-10 space-y-7">
+          <div className="lg:w-[50%] text-center lg:text-left z-10 space-y-7 pt-6 lg:pt-8">
 
             {/* Badge */}
             <motion.div
@@ -86,10 +86,10 @@ export const Hero = () => {
             </motion.div>
 
             {/* Headline */}
-            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-['Varela_Round'] font-extrabold text-[#008080] tracking-tight leading-[1.1]">
+            <h1 className="text-5xl lg:text-5xl xl:text-6xl font-['Varela_Round'] font-extrabold text-[#008080] tracking-tight leading-[1.1]">
               Somos tu mejor opción en
               <br />
-              <span className="block min-h-[106px] lg:min-h-[132px] xl:min-h-[160px]">
+              <span className="block min-h-[106px] lg:min-h-[106px] xl:min-h-[132px]">
                 <span className="relative inline-block text-[#E91E63]">
                   {typedAccent}
                   <span className="animate-pulse opacity-60">|</span>
