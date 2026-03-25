@@ -68,11 +68,11 @@ export const Hero = () => {
       </div>
 
       {/* Container — NOT relative so the image can anchor to the section */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full pt-16 pb-8 lg:pt-0 lg:pb-0">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full pt-10 pb-6 md:pt-4 md:pb-4 lg:pt-0 lg:pb-0">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-0 w-full">
 
           {/* ── Left: text content ── */}
-          <div className="lg:w-[50%] text-center lg:text-left z-10 space-y-7 pt-6 lg:pt-8">
+          <div className="lg:w-[50%] text-center lg:text-left z-10 space-y-7 md:space-y-4 lg:space-y-5 pt-4 md:pt-0 lg:pt-4">
 
             {/* Badge */}
             <motion.div
@@ -86,10 +86,10 @@ export const Hero = () => {
             </motion.div>
 
             {/* Headline */}
-            <h1 className="text-5xl lg:text-5xl xl:text-6xl font-['Varela_Round'] font-extrabold text-[#008080] tracking-tight leading-[1.1]">
+            <h1 className="text-5xl md:text-4xl lg:text-4xl xl:text-5xl font-['Varela_Round'] font-extrabold text-[#008080] tracking-tight leading-[1.1]">
               Somos tu mejor opción en
               <br />
-              <span className="block min-h-[106px] lg:min-h-[106px] xl:min-h-[132px]">
+              <span className="block min-h-[106px] md:min-h-[80px] lg:min-h-[80px] xl:min-h-[106px]">
                 <span className="relative inline-block text-[#E91E63]">
                   {typedAccent}
                   <span className="animate-pulse opacity-60">|</span>
@@ -105,7 +105,7 @@ export const Hero = () => {
               variants={fadeUp(0.2)}
               initial="hidden"
               animate="visible"
-              className="text-lg lg:text-xl text-[#546E7A] max-w-lg mx-auto lg:mx-0 font-['Inter'] leading-relaxed"
+              className="text-lg md:text-sm lg:text-base text-[#546E7A] max-w-lg mx-auto lg:mx-0 font-['Inter'] leading-relaxed"
             >
               Renta de brincolines limpios, seguros y puntuales para fiestas increíbles.{' '}
               <span className="font-semibold text-[#008080]">Renta rápida y fácil.</span>
@@ -116,7 +116,7 @@ export const Hero = () => {
               initial="hidden"
               animate="visible"
               variants={{ visible: { transition: { staggerChildren: 0.08, delayChildren: 0.3 } } }}
-              className="flex flex-col gap-2 text-sm font-medium text-[#546E7A] items-center lg:items-start"
+              className="flex flex-col gap-2 md:gap-1.5 text-sm md:text-xs lg:text-sm font-medium text-[#546E7A] items-center lg:items-start"
             >
               {checklistItems.map((item) => (
                 <motion.li key={item} variants={fadeUp(0)} className="flex items-center gap-2">
@@ -131,13 +131,13 @@ export const Hero = () => {
               variants={fadeUp(0.55)}
               initial="hidden"
               animate="visible"
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2"
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2 md:pt-0"
             >
               <a
                 href="https://wa.me/524493970110"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-[#E91E63] hover:bg-[#D81B60] text-white px-8 py-4 rounded-[32px] font-['Varela_Round'] text-lg font-bold shadow-[0_8px_30px_rgb(233,30,99,0.35)] transition-all hover:scale-105 hover:shadow-[0_12px_40px_rgb(233,30,99,0.45)]"
+                className="inline-flex items-center justify-center gap-2 bg-[#E91E63] hover:bg-[#D81B60] text-white px-8 py-4 md:py-3 rounded-[32px] font-['Varela_Round'] text-lg md:text-base font-bold shadow-[0_8px_30px_rgb(233,30,99,0.35)] transition-all hover:scale-105 hover:shadow-[0_12px_40px_rgb(233,30,99,0.45)]"
               >
                 ¡Quiero apartar mi brincolín!
                 <ArrowRight className="w-5 h-5" />
@@ -167,7 +167,7 @@ export const Hero = () => {
             initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
-            className="w-full lg:w-[52%] relative flex justify-end items-end z-10 md:absolute md:right-0 md:bottom-0 md:w-[52%] md:h-[70%]"
+            className="w-full lg:w-[52%] relative flex justify-end items-end z-0 md:absolute md:right-0 md:bottom-0 md:w-[52%] md:h-[70vh]"
           >
             {/* Floating 5-star badge */}
             <motion.div

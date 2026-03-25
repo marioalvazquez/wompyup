@@ -32,10 +32,25 @@ export const Header = () => {
             </span>
           </a>
 
-          <nav className="hidden md:flex space-x-8 items-center">
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8">
             <a href="#experiencia" className="text-[#546E7A] hover:text-[#E91E63] font-medium transition-colors">Experiencia</a>
             <a href="#beneficios" className="text-[#546E7A] hover:text-[#E91E63] font-medium transition-colors">Beneficios</a>
             <a href="#testimonios" className="text-[#546E7A] hover:text-[#E91E63] font-medium transition-colors">Testimonios</a>
+
+            {/* Phone CTA */}
+            <a
+              href="https://wa.me/524493970110"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2.5 text-[#008080] border-l border-[#00CED1]/30 pl-6"
+            >
+              <span className="w-[22px] h-[22px] shrink-0"><WhatsAppIcon /></span>
+              <span className="flex flex-col items-start leading-tight">
+                <span className="text-[11px] text-[#546E7A] font-normal font-['Inter']">Renta ahora</span>
+                <span className="text-[15px] font-bold tracking-wide font-['Inter']">449 397 01 10</span>
+              </span>
+            </a>
+
             <a
               href="https://wa.me/524493970110"
               target="_blank"
