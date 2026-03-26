@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Hls from 'hls.js';
 
 const videos = [
@@ -40,11 +41,13 @@ export const Gallery = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const hlsRef = useRef<Hls | null>(null);
 
+  const prevIdx = (active - 1 + videos.length) % videos.length;
+  const nextIdx = (active + 1) % videos.length;
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Destroy previous HLS instance
     if (hlsRef.current) {
       hlsRef.current.destroy();
       hlsRef.current = null;
@@ -53,15 +56,13 @@ export const Gallery = () => {
     const { hls, src } = videos[active];
 
     if (Hls.isSupported()) {
-      const hlsInstance = new Hls({ startLevel: -1 }); // auto quality
+      const hlsInstance = new Hls({ startLevel: -1 });
       hlsInstance.loadSource(hls);
       hlsInstance.attachMedia(video);
       hlsRef.current = hlsInstance;
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      // Safari has native HLS support
       video.src = hls;
     } else {
-      // Fallback to original mp4
       video.src = src;
     }
 
@@ -98,32 +99,32 @@ export const Gallery = () => {
           </p>
         </motion.div>
 
+        {/* ── Mobile: single video + thumbnail strip ── */}
         <motion.div
-          className="mx-auto rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(233,30,99,0.1)] bg-white p-2"
+          className="md:hidden mx-auto rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(233,30,99,0.1)] bg-white p-2"
           initial={{ opacity: 0, scale: 0.97 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: 'easeOut', delay: 0.15 }}
         >
-          {/* Main video */}
-          <div className="relative aspect-[9/16] md:aspect-video bg-black rounded-[24px] overflow-hidden">
+          <div className="relative aspect-[9/16] bg-black rounded-[24px] overflow-hidden">
             <video
-              ref={videoRef}
+              src={videos[active].src}
               poster={videos[active].thumb}
               className="w-full h-full object-cover"
               controls
               playsInline
               preload="none"
+              key={active}
             />
           </div>
 
-          {/* Thumbnail strip */}
           <div className="flex gap-2 mt-2 px-1 pb-1 overflow-x-auto scrollbar-hide">
             {videos.map((video, idx) => (
               <button
                 key={idx}
                 onClick={() => goTo(idx)}
-                className={`relative flex-shrink-0 w-24 md:w-32 aspect-video rounded-[12px] overflow-hidden border-[3px] transition-all duration-200 ${
+                className={`relative flex-shrink-0 w-24 aspect-[9/16] rounded-[12px] overflow-hidden border-[3px] transition-all duration-200 ${
                   idx === active
                     ? 'border-[#E91E63] scale-[1.04] shadow-md'
                     : 'border-transparent opacity-60 hover:opacity-100'
@@ -147,6 +148,95 @@ export const Gallery = () => {
               </button>
             ))}
           </div>
+        </motion.div>
+
+        {/* ── Tablet/Desktop: vertical carousel ── */}
+        <motion.div
+          className="hidden md:flex items-center justify-center gap-5"
+          initial={{ opacity: 0, scale: 0.97 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: 'easeOut', delay: 0.15 }}
+        >
+          {/* Prev card */}
+          <motion.button
+            className="flex-shrink-0 focus:outline-none cursor-pointer"
+            style={{ width: 200, opacity: 0.42 }}
+            whileHover={{ opacity: 0.68, transition: { duration: 0.2 } }}
+            onClick={() => goTo(prevIdx)}
+            aria-label="Video anterior"
+          >
+            <div className="aspect-[9/16] rounded-[20px] overflow-hidden bg-black relative mt-8 shadow-lg">
+              <img
+                src={videos[prevIdx].thumb}
+                alt={`Brincolin ${prevIdx + 1}`}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-black/50" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
+                  <ChevronLeft className="w-6 h-6 text-white" />
+                </div>
+              </div>
+            </div>
+          </motion.button>
+
+          {/* Active card */}
+          <div className="flex-shrink-0" style={{ width: 300 }}>
+            <div className="rounded-[28px] overflow-hidden bg-white p-2 shadow-[0_20px_60px_rgba(233,30,99,0.18)]">
+              <div className="aspect-[9/16] rounded-[20px] overflow-hidden bg-black">
+                <video
+                  ref={videoRef}
+                  poster={videos[active].thumb}
+                  className="w-full h-full object-cover"
+                  controls
+                  playsInline
+                  preload="none"
+                />
+              </div>
+            </div>
+
+            {/* Dot indicators */}
+            <div className="flex justify-center items-center gap-2 mt-5">
+              {videos.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => goTo(idx)}
+                  aria-label={`Ir al video ${idx + 1}`}
+                  className={`rounded-full transition-all duration-200 ${
+                    idx === active
+                      ? 'w-6 h-2.5 bg-[#E91E63]'
+                      : 'w-2.5 h-2.5 bg-gray-300 hover:bg-gray-400'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Next card */}
+          <motion.button
+            className="flex-shrink-0 focus:outline-none cursor-pointer"
+            style={{ width: 200, opacity: 0.42 }}
+            whileHover={{ opacity: 0.68, transition: { duration: 0.2 } }}
+            onClick={() => goTo(nextIdx)}
+            aria-label="Siguiente video"
+          >
+            <div className="aspect-[9/16] rounded-[20px] overflow-hidden bg-black relative mt-8 shadow-lg">
+              <img
+                src={videos[nextIdx].thumb}
+                alt={`Brincolin ${nextIdx + 1}`}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-black/50" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
+                  <ChevronRight className="w-6 h-6 text-white" />
+                </div>
+              </div>
+            </div>
+          </motion.button>
         </motion.div>
 
         <motion.div

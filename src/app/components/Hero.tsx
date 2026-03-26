@@ -167,7 +167,7 @@ export const Hero = () => {
             initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
-            className="w-full lg:w-[52%] relative flex justify-end items-end z-0 md:absolute md:right-0 md:bottom-0 md:w-[52%] md:h-[70vh]"
+            className="w-full lg:w-[60%] relative flex justify-end items-end z-0 md:absolute md:right-0 md:bottom-0 md:w-[60%] md:h-[80vh]"
           >
             {/* Floating 5-star badge */}
             <motion.div
