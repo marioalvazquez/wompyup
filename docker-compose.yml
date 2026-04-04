@@ -1,0 +1,11 @@
+services:
+  nginx:
+    build: .
+    container_name: wompyup-nginx
+    networks:
+      - web
+    restart: unless-stopped
+
+networks:
+  web:
+    external: true
